@@ -1,0 +1,266 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.headerpage {
+    background-color: #5ba4a4; /* Example header color */
+    height: 150px;
+    margin-bottom: 0; /* No margin here, filter bar will sit below */
+}
+.headerpage img{
+ height: 150px;   
+}
+
+/* Filter Bar Styling */
+.filter-bar-container {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 1100px;
+    margin: -40px auto 25px auto; /* Negative margin to overlap header, auto for centering */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping of filter tags */
+    gap: 15px; /* Space between filter list and clear button */
+
+    /* Initially hidden */
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, height 0.3s ease, padding 0.3s ease;
+}
+
+.filter-bar-container.active {
+    opacity: 1;
+    visibility: visible;
+    height: auto; /* Allow content to define height */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.filter-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between individual filter tags */
+    flex-grow: 1; /* Allow tags to take up most space */
+}
+
+.filter-tag-item {
+    background-color: #eef6f6;
+    color: #5ba4a4;
+    padding: 6px 0; /* Adjusted padding for inner button */
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    display: flex; /* Use flex to align text and X */
+    align-items: center;
+}
+
+.filter-tag-text {
+    padding-left: 10px;
+}
+
+.remove-filter-btn {
+    background-color: #5ba4a4;
+    color: white;
+    border: none;
+    padding: 6px 8px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.remove-filter-btn:hover {
+    background-color: #2b3945; /* Darker on hover */
+}
+
+.clear-filters-btn {
+    background: none;
+    border: none;
+    color: #5ba4a4;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.2s ease;
+}
+
+.clear-filters-btn:hover {
+    text-decoration: underline;
+    color: #2b3945;
+}
+
+
+/* Job Listings Container - Adjusted margin-top to fit filter bar */
+.job-listings-container {
+    max-width: 1100px;
+    margin: 0 auto 20px auto; /* Adjusted margin-top */
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Space between job cards */
+}
+
+/* Existing Job Card Styling (from previous response) */
+.job-card {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    position: relative; /* For featured border */
+}
+
+.job-card-featured {
+    border-left: 5px solid #5ba4a4; /* Featured border color */
+    padding-left: 25px; /* Adjust padding due to border */
+}
+
+.job-card-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1; /* Allows it to take available space */
+    flex-basis: 60%; /* Preferred width */
+    min-width: 300px; /* Prevent shrinking too much */
+}
+
+.company-logo {
+    width: 80px; /* Adjust size as needed */
+    height: 80px;
+    border-radius: 50%; /* If logos are circular */
+    object-fit: cover;
+}
+
+.job-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.company-name {
+    color: #5ba4a4;
+    font-weight: bold;
+}
+
+.tag {
+    background-color: #5ba4a4;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.new-tag {
+    background-color: #5ba4a4;
+}
+
+.featured-tag {
+    background-color: #2b3945; /* Darker color for featured */
+}
+
+.job-position {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.job-position:hover {
+    color: #5ba4a4;
+}
+
+.job-meta {
+    font-size: 0.9em;
+    color: #7b8e8e;
+    display: flex;
+    gap: 10px;
+}
+
+.job-card-right {
+    flex-grow: 1;
+    flex-basis: 30%; /* Preferred width */
+    display: flex;
+    justify-content: flex-end; /* Align tags to the right */
+    flex-wrap: wrap; /* Allow tags to wrap */
+    gap: 10px; /* Space between tags */
+}
+
+.job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.job-tag {
+    background-color: #eef6f6;
+    color: #5ba4a4;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.job-tag:hover {
+    background-color: #5ba4a4;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .job-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 20px; /* Add space below tags */
+    }
+
+    .job-card-left {
+        flex-basis: 100%; /* Take full width */
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee; /* Separator */
+        padding-bottom: 15px;
+    }
+
+    .company-logo {
+        position: absolute;
+        top: -40px; /* Move logo above card on mobile */
+        left: 20px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .job-details {
+        margin-top: 30px; /* Space for logo */
+    }
+
+    .job-card-right {
+        flex-basis: 100%; /* Take full width */
+        justify-content: flex-start; /* Align tags to the left */
+        border-top: none; /* Remove top border if present */
+        padding-top: 0;
+    }
+}
