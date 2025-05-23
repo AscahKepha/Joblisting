@@ -3,16 +3,16 @@ const filterBarContainer = document.getElementById('filterBarContainer');
 const filterTagsList = document.getElementById('filterTagsList');
 const clearFiltersBtn = document.getElementById('clearFiltersBtn');
 
-let allJobs = []; // Stores the original, unfiltered list of jobs
-let activeFilters = []; // Stores the tags currently selected as filters
+let allJobs = []; 
+let activeFilters = []; 
 
 function renderFilterBar() {
-    filterTagsList.innerHTML = ''; // Clear existing filter tags
+    filterTagsList.innerHTML = '';
 
     if (activeFilters.length === 0) {
-        filterBarContainer.classList.remove('active'); // Hide filter bar if no active filters
+        filterBarContainer.classList.remove('active');
     } else {
-        filterBarContainer.classList.add('active'); // Show filter bar
+        filterBarContainer.classList.add('active'); 
         activeFilters.forEach(filterTag => {
             const filterItem = document.createElement('div');
             filterItem.classList.add('filter-tag-item');
@@ -30,23 +30,19 @@ function renderFilterBar() {
     });
 }
 
-/**
- * Filters the job listings based on the active filters and renders them.
- */
 function filterAndRenderJobs() {
     let filteredJobs = allJobs;
 
     if (activeFilters.length > 0) {
         filteredJobs = allJobs.filter(job => {
-            // Combine all relevant tags for the job into a single array
+        
             const jobTags = [job.role, job.level, ...job.languages, ...job.tools];
 
-            // Check if ALL active filters are present in the job's tags
             return activeFilters.every(filter => jobTags.includes(filter));
         });
     }
 
-    // Render the filtered jobs
+ 
     jobListingsContainer.innerHTML = ''; // Clear existing job cards
     filteredJobs.forEach(job => {
         const jobCard = document.createElement('div');
@@ -87,16 +83,12 @@ function filterAndRenderJobs() {
         jobListingsContainer.appendChild(jobCard);
     });
 
-    // Re-attach event listeners to all job tags in the newly rendered cards
     document.querySelectorAll('.job-tag').forEach(tag => {
         tag.addEventListener('click', handleJobTagClick);
     });
 }
 
-/**
- * Adds a filter tag to the active filters list.
- * @param {string} tag - The tag to add.
- */
+
 function addFilter(tag) {
     if (!activeFilters.includes(tag)) {
         activeFilters.push(tag);
@@ -105,19 +97,12 @@ function addFilter(tag) {
     }
 }
 
-/**
- * Removes a filter tag from the active filters list.
- * @param {string} tag - The tag to remove.
- */
 function removeFilter(tag) {
     activeFilters = activeFilters.filter(filter => filter !== tag);
     renderFilterBar();
     filterAndRenderJobs();
 }
 
-/**
- * Clears all active filters.
- */
 function clearAllFilters() {
     activeFilters = [];
     renderFilterBar();
@@ -126,39 +111,22 @@ function clearAllFilters() {
 
 // --- Event Handlers ---
 
-/**
- * Handles clicks on job tags within the job cards.
- * @param {Event} event - The click event object.
- */
 function handleJobTagClick(event) {
     const clickedTag = event.currentTarget.dataset.tag;
     addFilter(clickedTag);
 }
 
-/**
- * Handles clicks on the 'X' button in the filter bar to remove a filter.
- * @param {Event} event - The click event object.
- */
 function handleRemoveFilter(event) {
     const filterToRemove = event.currentTarget.dataset.filter;
     removeFilter(filterToRemove);
 }
-
-/**
- * Handles clicks on the "Clear" button in the filter bar.
- */
 function handleClearFiltersClick() {
     clearAllFilters();
 }
 
-// --- Initial Setup ---
-
-/**
- * Fetches job data from a JSON file, stores it, and renders initial listings.
- */
 async function initializeJobs() {
     try {
-        const response = await fetch('jobs.json'); // Path to your JSON file
+        const response = await fetch('data.json'); // Path to your JSON file
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
